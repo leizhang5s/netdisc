@@ -14,24 +14,13 @@ import cn.leizhang.utils.DataRourceUtils;
 
 public class UserDao {
 
-	public static boolean userLogin(User user) throws Exception {
+	public static User userLogin(String username,String password) throws Exception {
 		//连接数据库查表
-		String sql = "SELECT * FROM user";
+		String sql = "SELECT * FROM user where username=? and password=?";
 		QueryRunner runner = new QueryRunner(DataRourceUtils.getDatasource());
 
-		List<User> list=runner.query(sql, new BeanListHandler(User.class));
-		for(User user2: list)
-		{
-			
-			if(user2.getUsername().equals(user.getUsername())&&user2.getPassword().equals(user.getPassword()))
-			{
-				
-				return true;
-			}
-			
-		}
-		
-		return false;
+		User user=runner.query(sql, new BeanListHandler(User.class),username,password);
+		return user;
 	}
 
 	public static void userSave(User user) {

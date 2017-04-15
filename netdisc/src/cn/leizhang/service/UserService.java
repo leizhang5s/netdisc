@@ -5,9 +5,9 @@ import cn.leizhang.domain.User;
 
 public class UserService {
 	
-	public static boolean find_User(User user) throws Exception
+	public static User find_User(String username,String password) throws Exception
 	{
-		return UserDao.userLogin(user);
+		return UserDao.userLogin(username,password);
 		
 	
 	}
